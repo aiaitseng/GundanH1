@@ -303,27 +303,7 @@ const ERA_TIMELINE = {
   },
 };
 
-/** @type {Record<string, string>} */
-const DEPLOY_GUIDES = {
-  direct: `
-    <ol class="deploy-step-list">
-      <li><strong>準備工作檔案：</strong>確認專案根目錄包含 <code>index.html</code>、<code>style.css</code>、<code>script.js</code> 與 <code>src/assets/</code> 圖檔資料夾。</li>
-      <li><strong>建立 GitHub Repository：</strong>登入 GitHub 建立一個公開倉庫（例如 <code>gundam-ms-archive</code>），並使用右側指令推送至 <code>main</code> 分支。</li>
-      <li><strong>啟用 GitHub Pages：</strong>前往倉庫頁面的 <strong>Settings → Pages</strong>，在 Source 選擇 <strong>Deploy from a branch</strong>，分支選擇 <code>main</code> 與 <code>/(root)</code>，按下 Save。</li>
-      <li><strong>完成上線：</strong>等待約 1 分鐘後，即可透過 <code>https://&lt;你的帳號&gt;.github.io/&lt;倉庫名稱&gt;/</code> 瀏覽完整網頁。</li>
-    </ol>
-  `,
-  actions: `
-    <ol class="deploy-step-list">
-      <li><strong>內建自動化設定：</strong>本專案已包含 <code>.github/workflows/deploy.yml</code> 工作流程檔，推送程式碼後可自動執行打包與發布。</li>
-      <li><strong>調整 Pages 權限：</strong>前往 GitHub 倉庫 <strong>Settings → Pages</strong>，將 Build and deployment 的 Source 改為 <strong>GitHub Actions</strong>。</li>
-      <li><strong>推送觸發部署：</strong>執行右側 Git 推送指令至 <code>main</code> 分支，系統會自動運行建置並將產物部署至 GitHub Pages CDN。</li>
-      <li><strong>查看部署進度：</strong>於倉庫上方 <strong>Actions</strong> 分頁即可即時檢視建置與發布網址。</li>
-    </ol>
-  `,
-};
-
-/** @type {{filter: string, search: string, sort: string, compareA: string, compareB: string, activeEra: string, deployMode: string, modalSuitId: string | null, modalOverdrive: boolean}} */
+/** @type {{filter: string, search: string, sort: string, compareA: string, compareB: string, activeEra: string, modalSuitId: string | null, modalOverdrive: boolean}} */
 const state = {
   filter: 'all',
   search: '',
@@ -331,7 +311,6 @@ const state = {
   compareA: 'rx-78-2',
   compareB: 'ms-06s',
   activeEra: '0079',
-  deployMode: 'direct',
   modalSuitId: null,
   modalOverdrive: false,
 };
@@ -356,12 +335,6 @@ const compareSummaryNote = document.getElementById('compare-summary-note');
 
 const timelineTabs = document.querySelectorAll('.timeline-tab');
 const timelineDetail = document.getElementById('timeline-detail');
-
-const deployTabs = document.querySelectorAll('.deploy-tab');
-const deployInstructions = document.getElementById('deploy-instructions');
-const copyGitBtn = document.getElementById('copy-git-btn');
-const gitCommandBlock = document.getElementById('git-command-block');
-const copyFeedback = document.getElementById('copy-feedback');
 
 const modal = document.getElementById('suit-modal');
 const modalCloseBtn = document.getElementById('modal-close-btn');
@@ -823,7 +796,7 @@ function renderComparator() {
 }
 
 /* ==========================================================================
-   Timeline & Deployment Instructions
+   Timeline
    ========================================================================== */
 
 function renderTimeline() {
@@ -850,11 +823,6 @@ function renderTimeline() {
       </div>
     </div>
   `;
-}
-
-function renderDeployInstructions() {
-  if (!deployInstructions) return;
-  deployInstructions.innerHTML = DEPLOY_GUIDES[state.deployMode] || DEPLOY_GUIDES.direct;
 }
 
 /* ==========================================================================
@@ -955,29 +923,6 @@ function bindEvents() {
     });
   });
 
-  deployTabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      state.deployMode = tab.getAttribute('data-deploy') || 'direct';
-      deployTabs.forEach((t) => {
-        const active = t === tab;
-        t.classList.toggle('is-active', active);
-        t.setAttribute('aria-selected', String(active));
-      });
-      renderDeployInstructions();
-    });
-  });
-
-  copyGitBtn?.addEventListener('click', async () => {
-    const text = gitCommandBlock?.textContent?.trim() || '';
-    if (!text) return;
-    try {
-      await navigator.clipboard.writeText(text);
-      if (copyFeedback) copyFeedback.textContent = '已複製 Git 部署指令至剪貼簿。';
-    } catch {
-      if (copyFeedback) copyFeedback.textContent = '無法自動存取剪貼簿，請手動選取右側指令複製。';
-    }
-  });
-
   // Modal Events
   modalCloseBtn?.addEventListener('click', closeSuitModal);
   modal?.addEventListener('click', (e) => {
@@ -1019,7 +964,6 @@ function init() {
   renderSuitGrid();
   renderComparator();
   renderTimeline();
-  renderDeployInstructions();
   bindEvents();
 }
 

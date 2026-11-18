@@ -6,7 +6,7 @@
     <title>MS ARCHIVE — 宇宙世紀機動戰士檔案館</title>
     <meta
       name="description"
-      content="使用原生 HTML5、CSS3 與 Vanilla JavaScript 打造的宇宙世紀機動戰士技術檔案館，包含機體圖鑑、雙機雷達性能對比與 GitHub Pages 靜態部署配置。"
+      content="使用原生 HTML5、CSS3 與 Vanilla JavaScript 打造的宇宙世紀機動戰士技術檔案館，包含機體圖鑑、雙機雷達性能對比與宇宙世紀技術年表。"
     />
     <meta property="og:title" content="MS ARCHIVE — 宇宙世紀機動戰士檔案館" />
     <meta
@@ -35,7 +35,6 @@
           <a href="#archive" class="nav-link">機體圖鑑</a>
           <a href="#comparator" class="nav-link">性能對比</a>
           <a href="#timeline" class="nav-link">宇宙世紀</a>
-          <a href="#deploy" class="nav-link">部署指南</a>
         </nav>
 
         <div class="header-action">
@@ -57,7 +56,7 @@
               </p>
               <div class="hero-cta-row">
                 <a href="#archive" class="btn-primary btn-lg">檢視機體規格</a>
-                <a href="#deploy" class="btn-secondary-link">GitHub Pages 部署說明</a>
+                <a href="#comparator" class="btn-secondary-link">雙機性能雷達對比</a>
               </div>
             </div>
 
@@ -91,12 +90,12 @@
               <span class="summary-value tabular">U.C. 0079 – 0096</span>
             </div>
             <div class="summary-cell">
-              <span class="summary-label">前端實作技術</span>
-              <span class="summary-value">HTML5 · CSS3 · Vanilla JS</span>
+              <span class="summary-label">動力反應架構</span>
+              <span class="summary-value">米諾夫斯基熱核爐</span>
             </div>
             <div class="summary-cell">
-              <span class="summary-label">託管與部署方式</span>
-              <span class="summary-value">GitHub Pages 原生靜態</span>
+              <span class="summary-label">主要設計機構</span>
+              <span class="summary-value">亞納海姆電子 · 聯邦軍</span>
             </div>
           </div>
         </div>
@@ -318,62 +317,6 @@
           </div>
         </div>
       </section>
-
-      <!-- Section 04: GitHub Pages Deployment Guide -->
-      <section id="deploy" class="section-block section-alt">
-        <div class="container">
-          <div class="section-header">
-            <div>
-              <p class="section-index">04. GitHub Pages 部署指南</p>
-              <h2 class="section-title">純靜態程式碼即推即用</h2>
-            </div>
-            <p class="section-desc">
-              本專案採用標準 HTML、CSS 與 JavaScript 相對路徑架構，不依賴伺服器端運算即可直接託管於 GitHub Pages。
-            </p>
-          </div>
-
-          <div class="deploy-grid">
-            <div class="deploy-steps">
-              <div class="deploy-mode-switch" role="tablist" aria-label="部署方式選擇">
-                <button
-                  type="button"
-                  class="deploy-tab is-active"
-                  data-deploy="direct"
-                  role="tab"
-                  aria-selected="true"
-                >
-                  方法一：直接上傳靜態檔案
-                </button>
-                <button
-                  type="button"
-                  class="deploy-tab"
-                  data-deploy="actions"
-                  role="tab"
-                  aria-selected="false"
-                >
-                  方法二：GitHub Actions 自動發布
-                </button>
-              </div>
-
-              <div id="deploy-instructions" class="deploy-panel"></div>
-            </div>
-
-            <div class="deploy-terminal">
-              <div class="terminal-top">
-                <span class="terminal-title">Git 終端機指令</span>
-                <button type="button" id="copy-git-btn" class="btn-copy">複製指令</button>
-              </div>
-              <pre id="git-command-block" class="code-block"><code>git init
-git add index.html style.css script.js src/assets README.md
-git commit -m "Deploy Gundam MS Archive"
-git branch -M main
-git remote add origin https://github.com/&lt;你的帳號&gt;/&lt;倉庫名稱&gt;.git
-git push -u origin main</code></pre>
-              <p id="copy-feedback" class="copy-feedback" aria-live="polite"></p>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
 
     <!-- Quiet Institutional Footer -->
@@ -381,14 +324,13 @@ git push -u origin main</code></pre>
       <div class="container footer-inner">
         <div class="footer-brand">
           <span class="footer-wordmark">MS ARCHIVE</span>
-          <p class="footer-copy">宇宙世紀機動戰士機械圖鑑 · 原生 HTML5 / CSS3 / Vanilla JavaScript 建置</p>
+          <p class="footer-copy">宇宙世紀機動戰士機械圖鑑 · Universal Century Technical Archive</p>
         </div>
 
         <nav class="footer-links" aria-label="頁尾導覽">
           <a href="#archive">機體圖鑑</a>
           <a href="#comparator">性能對比</a>
           <a href="#timeline">宇宙世紀</a>
-          <a href="#deploy">GitHub 部署</a>
         </nav>
       </div>
     </footer>
